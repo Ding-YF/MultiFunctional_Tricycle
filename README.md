@@ -1,0 +1,2 @@
+# MultiFunctional_Tricycle
+通过APP控制的可实现手柄控制、重力控制、循线功能、自主探索等功能的多功能智能小车
