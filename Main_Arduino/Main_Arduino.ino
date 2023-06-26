@@ -15,6 +15,7 @@ int input4 = 10; // 定义uno的pin 10 向 input4 输出
 bool avoidMode = false;         // 是否启用避障模式
 
 void setup() {
+  Serial.begin(9600);         // 硬件串口，波特率为9600
   bluetooth.begin(9600);        // 蓝牙模块使用软串口，波特率为9600
   pinMode(trigPin, OUTPUT);    // 配置超声波模块的Trig引脚为输出模式
   pinMode(echoPin, INPUT);     // 配置超声波模块的Echo引脚为输入模式
@@ -28,6 +29,8 @@ pinMode(input4,OUTPUT);
 void loop() {
   if (bluetooth.available()) {   // 如果接收到蓝牙数据
     char cmd = bluetooth.read(); // 读取蓝牙数据
+    Serial.print("Received: ");
+    Serial.println(cmd);
     switch (cmd) {              // 根据接收到的命令进行处理
       case 'F':                // 前进
         forward();
@@ -41,8 +44,14 @@ void loop() {
       case 'R':                // 右转
         rightward();
         break;
+      case 's':                // 停止
+        stop();
+        break;  
       case 'A':                // 切换避障模式
-        avoidMode = !avoidMode; // 反转避障模式开关状态，实现切换功能
+        avoidMode = !avoidMode;  // 打开避障模式开关状态
+        break;
+      case 'a':                // 切换避障模式
+        avoidMode = !avoidMode;  // 反转避障模式开关状态，实现切换功能
         break;
       default:                 // 未知命令
         stop();
@@ -112,7 +121,7 @@ void steer() {
   delay(1000);         // 延时1秒等待舵机运动完成
   steering.write(0);   // 转向舵机至左侧极限位置
   delay(1000);         // 延时1秒等待舵机运动完成
-  steering.write(180); // 转向舵机至右侧极限位置
+  steering.write(155); // 转向舵机至右侧极限位置
   delay(1000);         // 延时1秒等待舵机运动完成
   steering.write(90);  // 转向舵机至中间位置
 }
