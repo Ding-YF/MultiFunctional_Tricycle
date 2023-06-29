@@ -2,16 +2,16 @@
 #include <Servo.h>
 
 const int bluetooth_rx = 12; //定义蓝牙串口引脚
-const int bluetooth_tx = 13;
+const int bluetooth_tx = 13; 
 
 SoftwareSerial bluetooth(bluetooth_rx, bluetooth_tx);  // 设置软串口，连接蓝牙模块
-int trigPin = 4;                // 超声波模块的Trig引脚
-int echoPin = 3;                // 超声波模块的Echo引脚
+int trigPin = 11;                // 超声波模块的Trig引脚
+int echoPin = 10;                // 超声波模块的Echo引脚
 Servo myServo;                 // 舵机对象
 int input1 = 5; // 定义uno的pin 5 向 input1 输出
 int input2 = 6; // 定义uno的pin 6 向 input2 输出
-int input3 = 8; // 定义uno的pin 9 向 input3 输出
-int input4 = 11; // 定义uno的pin 10 向 input4 输出
+int input3 = 3; // 定义uno的pin 9 向 input3 输出
+int input4 = 9; // 定义uno的pin 10 向 input4 输出
 bool avoidMode = false;         // 是否启用避障模式
 
 void setup() {
@@ -120,7 +120,7 @@ void steer() {
   delay(1000);         // 延时1秒等待舵机运动完成
   myServo.write(0);   // 转向舵机至左侧极限位置
   delay(1000);         // 延时1秒等待舵机运动完成
-  myServo.write(155); // 转向舵机至右侧极限位置
+  myServo.write(1130); // 转向舵机至右侧极限位置
   delay(1000);         // 延时1秒等待舵机运动完成
   myServo.write(90);  // 转向舵机至中间位置
 }
