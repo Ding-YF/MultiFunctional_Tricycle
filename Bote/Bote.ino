@@ -2,8 +2,8 @@
 #include <SoftwareSerial.h>
 
 // 定义蓝牙模块的RX和TX引脚
-const int bluetooth_rx = 12;
-const int bluetooth_tx = 13;
+const int bluetooth_rx = 2; //定义蓝牙串口引脚
+const int bluetooth_tx = 4; 
 
 // 创建一个软件串口对象，用于与蓝牙模块通信
 SoftwareSerial bluetooth(bluetooth_rx, bluetooth_tx);
