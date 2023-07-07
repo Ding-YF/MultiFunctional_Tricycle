@@ -52,14 +52,14 @@ void loop() {
         break;  
       case 'A':                // 切换避障模式
         avoidMode = true;  // 打开避障模式开关状态
-        Serial.print("Mode1: ");
-        Serial.print(avoidMode);
+        Serial.print("Mode: ");
+        Serial.println(avoidMode);
         break;
       case 'a':                // 切换避障模式
         avoidMode = false;  // 反转避障模式开关状态，实现切换功能
         stop();
-        Serial.print("Mode0: ");
-        Serial.print(avoidMode);
+        Serial.print("Mode: ");
+        Serial.println(avoidMode);
         break;
       default:                 // 未知命令
         stop();
@@ -67,8 +67,8 @@ void loop() {
     }
   }
   if (avoidMode) {              // 如果处于避障模式
-    
     int distance = detectObstacle();  // 检测距离
+    Serial.println(distance);
     if (distance < 15) {        // 如果距离小于5cm
       stop(); 
       delay(1000);                  
@@ -142,9 +142,7 @@ void stop() {
 }
 
 void steer(int& value1, int& value2) {
-  Serial.print("here1");
   for (angle = 90; angle <= 180; angle += 1){  // 逐渐增加角度
-  Serial.print("here2");
   myServo.write(angle);    // 设置舵机位置
   delay(15);               // 等待一段时间
   if (angle == 180){
